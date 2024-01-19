@@ -23,6 +23,18 @@
     - set_repos_chrome_repo
     - chrome.stdout != "google-chrome"
 
+# Verify GPG signatures on installing packages from RPM Fusion repos
+- name: Ensure the distribution-gpg-keys package is installed
+  ansible.builtin.dnf:
+    name: distribution-gpg-keys
+  state: present
+
+- name: Import RPM Fusion GPG keys
+  ansible.builtin.rpm_key:
+    key:
+      - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
+      - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
+
 - name: Install RPM Fusion packages
   ansible.builtin.dnf:
     name:
