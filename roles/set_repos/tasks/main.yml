@@ -27,7 +27,7 @@
 - name: Ensure the distribution-gpg-keys package is installed
   ansible.builtin.dnf:
     name: distribution-gpg-keys
-  state: present
+    state: present
 
 - name: Import RPM Fusion GPG keys
   ansible.builtin.rpm_key:
