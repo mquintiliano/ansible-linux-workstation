@@ -33,8 +33,7 @@
 
 - name: Install Poetry
   ansible.builtin.shell:
-    cmd: /tmp/poetry_install.py
-    executable: /usr/bin/python3
+    cmd: python3 /tmp/poetry_install.py
   when: poetry_ver.failed
   changed_when: true
 
