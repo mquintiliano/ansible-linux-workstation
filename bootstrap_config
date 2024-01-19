@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+#
+# config-bootstrap -
+
+set -e
+
+function usage_msg() {
+	# Using
+	echo "Usage: $(basename "$0") [-h | -l | TASKS]
+  
+  OPTIONS
+    -h, --help         print this help
+    -l, --list         list all configuration tasks
+
+  Running specifics configuration tasks
+    ./$(basename "$0") repos,virt
+
+  NOTE
+    With no arguments, $(basename "$0") will execute all configuration tasks.   
+  "
+	exit 0
+}
+
+function list_tasks() {
+	# Listing configuration tasks
+	echo "Configuration tasks:
+
+  TASKS
+    repos          Configure package repositories: RPM Fusion, and others
+    packages       Install additional packages (and remove a few)
+    tweaks         Install Gnome Shell extensions and and some tweaks
+    virt           Add virtualization support to the host (includes virtio-win)
+    binary-pkgs    Install select binary packages not available in RPM 
+      
+  NOTE:
+    With no arguments, $(basename "$0") will execute all configuration tasks.   
+  "
+	exit 0
+}
+
+function check_ansible() {
+	# First things first, ensuring we have Ansible installed.
+	echo "Checking if Ansible is present..."
+	if ! [ -x "$(command -v ansible)" ]; then
+		echo "Installing Ansible..."
+		sudo dnf install -y ansible
+	else
+		echo "We're all set..."
+	fi
+}
+
+case "$1" in
+-h | --help)
+	usage_msg
+	exit 0
+	;;
+
+-l | --list)
+	list_tasks
+	exit 0
+	;;
+
+*)
+	if [ -z $1 ]; then
+		TAGS="all"
+	fi
+	check_ansible
+	ansible-playbook ./post-install.yml --tags "$TAGS"
+	;;
+esac

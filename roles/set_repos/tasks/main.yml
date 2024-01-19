@@ -1,0 +1,31 @@
+---
+# tasks file for set_repos
+
+# Ensure the Fedora workstation third-party rpm packages is installed
+- name: Install Fedora workstation Repositories package
+  ansible.builtin.dnf:
+    name: fedora-workstation-repositories
+
+# Check whether Google Chrome repo is enabled
+- name: Check whether Google Chrome repo is enabled
+  ansible.builtin.shell:
+    cmd: dnf repolist | grep -o "^google-chrome"
+  register: chrome
+  ignore_errors: true
+  changed_when: false
+  when: set_repos_chrome_repo
+
+# Enable Google chrome repository
+- name: Enable the Google chrome repo
+  ansible.builtin.command: /usr/bin/dnf config-manager --set-enabled google-chrome
+  changed_when: true
+  when:
+    - set_repos_chrome_repo
+    - chrome.stdout != "google-chrome"
+
+- name: Install RPM Fusion packages
+  ansible.builtin.dnf:
+    name:
+      - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
+      - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present

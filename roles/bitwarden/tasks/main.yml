@@ -1,0 +1,23 @@
+---
+# tasks file for Password manager
+
+#
+# Install Bitwarden Password manager via NPM
+#
+
+- name: Check if Bitwarden CLI is already installed
+  ansible.builtin.command: bw --version
+  register: bw_ver
+  ignore_errors: true
+  changed_when: false
+
+# Debugging conditionals
+# - name: Check bw_ver content
+#   ansible.builtin.debug:
+#     var: bw_ver
+
+- name: Install Bitwarden CLI with NPM
+  ansible.builtin.command:
+    cmd: npm install -g @bitwarden/cli
+  when: bw_ver.failed
+  changed_when: true

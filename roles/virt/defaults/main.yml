@@ -1,0 +1,8 @@
+---
+# defaults file for virt
+virt_virtualization_plus: false
+
+virt_virt_supp:
+  # - fence-virtd
+  # - fence-virtd-multicast
+  # - fence-agents-virsh

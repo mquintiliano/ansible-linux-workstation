@@ -1,0 +1,11 @@
+---
+# handlers file for virt
+
+#
+# Enable and start libvirtd service
+#
+
+- name: Ensure service libvirtd is running
+  ansible.builtin.systemd:
+    state: started
+    name: libvirtd

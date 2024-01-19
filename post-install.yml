@@ -1,0 +1,40 @@
+---
+- name: Workstation Post Install
+  hosts: localhost
+  become: true
+
+  vars_files:
+    - config.yml
+
+  tasks:
+    - name: Configure package repositories
+      ansible.builtin.include_role:
+        name: set_repos
+      tags: repos
+
+    - name: Install additional packages
+      ansible.builtin.include_role:
+        name: packages
+      tags: packages
+
+    - name: Install Gnome Shell extensions and tweaks
+      ansible.builtin.include_role:
+        name: tweaks
+      tags: tweaks
+
+    - name: Install Virtualization software support
+      ansible.builtin.include_role:
+        name: virt
+      tags: virt
+
+    - name: Install non-RPM binary packages
+      ansible.builtin.include_role:
+        name: "{{ item }}"
+      loop:
+        - bitwarden
+        - duckdb
+        - omf
+        - poetry
+        - starship
+      when: binary_pkgs
+      tags: binary-pkgs

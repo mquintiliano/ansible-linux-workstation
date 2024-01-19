@@ -1,0 +1,54 @@
+---
+# defaults file for packages
+
+# Remove not used packages installed within the workstation
+# Add or remove package names as appropriate to the list "remove_packages" below
+packages_delete_software: true
+
+packages_extra_packages:
+  # cli
+  - ansible-collection-community-general
+  - dnf-utils
+  - fd-find
+  # - ffmpeg
+  - fish
+  - fzf
+  - fprintd
+  - htop
+  - krb5-workstation
+  - libstdc++-devel
+  - lm_sensors
+  - lshw
+  - openldap-clients
+  - p7zip
+  - p7zip-plugins
+  - podman
+  - podman-compose
+  - ripgrep
+  - unrar
+  - youtube-dl
+  - neovim
+  - nodejs-npm
+  - jq
+  # Fonts
+  - adobe-source-code-pro-fonts
+  - cascadia-code-fonts
+  # gui apps
+  - gimp
+  - inkscape
+  - google-chrome-stable
+  - util-linux-user
+  # gnome apps and extensions:
+  - gnome-tweaks
+  - gnome-extensions-app
+  - gnome-terminal-nautilus
+  # development tools:
+  - python3-ipython
+  - python3-pip
+  - cargo # Rust package manager
+  - rust
+  - rust-src
+
+packages_remove_packages:
+  - gnome-boxes
+  - rhythmbox

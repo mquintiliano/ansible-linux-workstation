@@ -1,0 +1,41 @@
+---
+# tasks file for virt
+
+# Check whether the Virtualization package group is installed
+- name: Check whether Virtualization group is installed
+  ansible.builtin.shell:
+    cmd: dnf grouplist installed --hidden | grep -o Virtualization
+  register: virt
+  ignore_errors: true
+  changed_when: false
+
+# Adding Virtualization support
+- name: Install the Virtualization package group
+  ansible.builtin.command:
+    cmd: dnf group install -y --with-optional Virtualization
+  changed_when: true
+  when:
+    - virt.stdout == ""
+    - ansible_virtualization_role == "host"
+
+
+# VirtIO para-virtualized drivers for Windows
+- name: Install virtio-win repo
+  ansible.builtin.get_url:
+    url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+    dest: /etc/yum.repos.d/virtio-win.repo
+    mode: 644
+
+- name: Install virtio-win package
+  ansible.builtin.dnf:
+    name: virtio-win
+    state: present
+
+# Install supplementary virtualization packages
+- name: Installing additional virtualization packages
+  ansible.builtin.dnf:
+    name: "{{ virt_virt_supp }}"
+    state: present
+  when: virt_virtualization_plus
+  notify:
+    - Ensure service libvirtd is running

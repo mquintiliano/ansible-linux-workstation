@@ -1,0 +1,14 @@
+---
+- name: Testing conditions based on registered variables
+  hosts: localhost
+
+  tasks:
+  - name: Check if Chezmoi is already installed
+    ansible.builtin.command: chezmoi --version
+    register: chez_ver
+    ignore_errors: true
+
+  - name: Check stderr for emptiness
+    ansible.builtin.debug:
+      msg: "Chezmoi is installed!"
+    when: chez_ver.stderr == ""

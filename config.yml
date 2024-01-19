@@ -1,0 +1,39 @@
+---
+#
+# config.yml - Overriding Defaults
+#
+# It is possible to override any of the roles default variables using this
+# config file instead of editing `defaults/main.yml` for each role.
+
+# Role: pgk-repos
+# Type: Boolean
+# Description: Enable RPM Fusion non-free and Google Chrome repositories.
+#              Note: Not everyone wants non-free packages and/or the chrome
+#              browser installed, if that's your case, ensure no packages
+#              coming from these repos are listed into the role packages at
+#              `vars/main.yml`
+#
+add_rpmfusion_nonfree: true
+enable_chrome_repo: true
+
+# Role: packages
+# Type: Boolean
+# Description: Remove some software packages installed by default within
+#              the workstation. Check `vars/mail.yml` for the list of
+#              packages to be removed.
+#
+delete_software: true
+
+
+# Role: tweaks
+# Type: Boolean
+# Description: Install a few shell extensions and apply specific settings
+#              tweak to the Gnome desktop.
+#
+enable_tweaks: true
+install_gnome_extensions: true
+
+# Role: 
+# Type: Boolean
+# Description: Control the installation of binary (non-rpm) packages
+binary_pkgs: true

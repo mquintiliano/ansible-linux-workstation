@@ -1,0 +1,4 @@
+---
+# defaults file for oh-my-fish
+
+omf_install_url: https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install

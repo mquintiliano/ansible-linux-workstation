@@ -1,0 +1,33 @@
+---
+# tasks file for non-rpm
+
+#
+# Install applications not packaged in RPM format
+#
+
+- name: Get regular user
+  ansible.builtin.set_fact:
+    remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+- name: Check if starship is already installed
+  ansible.builtin.command: "~{{ remote_regular_user }}/.local/bin/starship -V"
+  register: starship_ver
+  ignore_errors: true
+  changed_when: false
+
+# - debug:
+#     var: starsip_ver
+
+- name: Get starship install script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+  when: starship_ver.failed
+
+- name: Install starship
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh -s -- -y --bin-dir $HOME/.local/bin
+    executable: /bin/sh
+  when: starship_ver.failed
+  changed_when: true

@@ -1,0 +1,6 @@
+---
+# defaults file for bitwarden
+
+# Install Bitwarden CLI as per tasks/main.yml
+bitwarden_cli: true
+bitwarden_download_url: 'https://vault.bitwarden.com/download/?app=cli&platform=linux'

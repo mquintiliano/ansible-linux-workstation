@@ -1,0 +1,45 @@
+---
+# tasks file for omf
+
+#
+# Install Oh-My-Fish
+#
+
+- name: Get regular user
+  ansible.builtin.set_fact:
+    remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+- name: Check if oh-my-fish (omf )is installed for fish user
+  ansible.builtin.stat:
+    path: "~{{ remote_regular_user }}/.local/share/omf"
+  register: omf_status
+  ignore_errors: true
+  changed_when: false
+
+- name: Get Oh My Fish script install with Git
+  ansible.builtin.git:
+    repo: 'https://github.com/oh-my-fish/oh-my-fish'
+    version: 7
+    dest: /tmp/omf
+  when: omf_status.failed
+
+- name: Install Oh-My-Fish
+  ansible.builtin.command:
+    cmd: /tmp/omf/bin/install -y --offline --noninteractive
+  when: omf_status.failed
+  changed_when: true
+
+# - name: Chekck if the bang-bang plugin is istalled
+#   ansible.builtin.shell:
+#     cmd: env fish --init-command omf list | grep -o "bang-bang"
+#   register: omf_plugin_ok
+#
+# - name: Install bang-bang omf plugin
+#   ansible.builtin.command:
+#     cmd: env fish -c omf install bang-bang
+#   when: omf_plugin_ok.failed == true
+#
+# # If already installed, update...
+# - name: Update Oh-My-Fish
+#   ansible.builtin.command:
+#     cmd: env fish -c omf update

@@ -1,0 +1,11 @@
+---
+# defaults file for tweaks
+tweaks_enable: true
+tweaks_install_gnome_extensions: true
+
+tweaks_extension_packages:
+  - gnome-shell-extension-gsconnect
+  - gnome-shell-extension-blur-my-shell
+  - gnome-shell-extension-just-perfection
+  - gnome-shell-extension-dash-to-dock
+  - gnome-shell-extension-caffeine

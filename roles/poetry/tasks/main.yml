@@ -1,0 +1,38 @@
+---
+# tasks file for poetry
+
+#
+# Install Poetry with the official installer
+#
+
+- name: Get regular user
+  ansible.builtin.set_fact:
+    remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
+- name: Check if poetry is already installed
+  ansible.builtin.command: "~{{ remote_regular_user }}/.local/bin/poetry --version"
+  register: poetry_ver
+  ignore_errors: true
+  changed_when: false
+
+- name: Get poetry install script
+  ansible.builtin.get_url:
+    url: https://install.python-poetry.org
+    dest: /tmp/poetry_install.py
+    mode: '0755'
+  when: poetry_ver.failed
+  changed_when: true
+
+- name: Install Poetry
+  ansible.builtin.shell:
+    cmd: /tmp/poetry_install.py
+    executable: /usr/bin/python3
+  when: poetry_ver.failed
+  changed_when: true
+
+# If already installed, update...
+- name: Update Poetry
+  ansible.builtin.command:
+    cmd: "~{{ remote_regular_user }}/.local/bin/poetry self update"
+  when: poetry_ver.failed
+  changed_when: true

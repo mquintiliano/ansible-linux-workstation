@@ -1,0 +1,11 @@
+---
+# requirements file for tweaks
+
+#
+# Required Python library for Ansible Dconf module
+#
+
+- name: Installing the required Python library (psutil)
+  ansible.builtin.dnf:
+    name: python3-psutil
+    state: present

@@ -1,0 +1,8 @@
+---
+# defaults file for set_repos
+
+# Allow installation of the "nonfree" package?
+set_repos_rpmfusion_nonfree: true
+
+# Enable the Google Chrome repository?
+set_repos_chrome_repo: true
