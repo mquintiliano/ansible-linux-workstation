@@ -30,7 +30,7 @@ function list_tasks() {
     packages       Install additional packages (and remove a few)
     tweaks         Install Gnome Shell extensions and and some tweaks
     virt           Add virtualization support to the host (includes virtio-win)
-    binary-pkgs    Install select binary packages not available in RPM 
+    binary_pkgs    Install select binary packages not available in RPM 
       
   NOTE:
     With no arguments, $(basename "$0") will execute all configuration tasks.   
@@ -63,6 +63,8 @@ case "$1" in
 *)
 	if [ -z $1 ]; then
 		TAGS="all"
+	else
+		TAGS=$1
 	fi
 	check_ansible
 	ansible-playbook ./post-install.yml --tags "$TAGS"
