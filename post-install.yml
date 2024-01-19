@@ -37,4 +37,4 @@
         - poetry
         - starship
       when: binary_pkgs
-      tags: binary-pkgs
+      tags: binary_pkgs
