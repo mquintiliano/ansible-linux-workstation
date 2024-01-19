@@ -32,6 +32,7 @@
   changed_when: true
 
 - name: Install Poetry
+  become: false
   ansible.builtin.shell:
     cmd: python3 /tmp/poetry_install.py
   when: poetry_ver.failed
