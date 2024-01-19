@@ -24,6 +24,7 @@
   when: omf_status.failed
 
 - name: Install Oh-My-Fish
+  become: false
   ansible.builtin.command:
     cmd: /tmp/omf/bin/install -y --offline --noninteractive
   when: omf_status.failed
