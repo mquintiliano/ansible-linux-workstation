@@ -14,14 +14,14 @@ Currently, the supported distros are:
 The `post-install.yml` playbook relies on roles to take care of each post install related task.
 
 - Available Roles
-  - bitwarden
-  - duckdb
-  - omf - Install Oh My Fish
-  - packages
-  - set_repos
-  - starship
-  - tweaks
-  - virt
+  - bitwarden   - Install the Bitwarden CLI Tool via NPM
+  - duckdb      - Install the DuckDB from https://duckdb.org
+  - omf         - Install Oh My Fish
+  - packages    - Manage the availability of software on the Linux machine 
+  - set_repos   - Enable extra repositories (includes RPM Fusion free/non-free)
+  - starship    - Install the Starship prompt
+  - tweaks      - Add Gnome Shell extensions and apply a few settings tweak
+  - virt        - Add Virtualization (graphical environment)
 
 ## Usage
 
