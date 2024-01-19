@@ -34,6 +34,7 @@ The bootstrap config is a small script that ensures Ansible is installed on the 
 $ cd ansible-linux-workstation
 $ ./bootstrap_config
 ```
+[!TIP]
 We can also select some specific role to be executed instead of all of them at once: 
 ```
 $ ./bootstrap_config --help
