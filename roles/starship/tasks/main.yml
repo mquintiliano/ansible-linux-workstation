@@ -35,7 +35,6 @@
 
 - name: Install starship
   ansible.builtin.shell:
-    cmd: /tmp/starship_install.sh -s -- -y --bin-dir $HOME/.local/bin
-    executable: /bin/sh
+    cmd: /bin/sh /tmp/starship_install.sh -s -- -y --bin-dir $HOME/.local/bin
   when: starship_ver.failed
   changed_when: true

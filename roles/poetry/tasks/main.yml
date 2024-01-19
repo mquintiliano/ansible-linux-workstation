@@ -42,5 +42,5 @@
 - name: Update Poetry
   ansible.builtin.command:
     cmd: "~{{ remote_regular_user }}/.local/bin/poetry self update"
-  when: poetry_ver.failed
+  when: not poetry_ver.failed
   changed_when: true
