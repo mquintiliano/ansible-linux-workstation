@@ -26,14 +26,8 @@
 # - debug:
 #     var: starsip_ver
 
-# - name: Get starship install script
-#   ansible.builtin.get_url:
-#     url: https://starship.rs/install.sh
-#     dest: /tmp/starship_install.sh
-#     mode: '0755'
-#   when: starship_ver.failed
-#
 - name: Install starship
+  become: false
   ansible.builtin.shell:
     cmd: /usr/bin/curl -sS https://starship.rs/install.sh | sh -s -- -y --bin-dir $HOME/.local/bin
   when: starship_ver.failed
