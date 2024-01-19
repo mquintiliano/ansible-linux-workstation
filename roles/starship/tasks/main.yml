@@ -35,6 +35,6 @@
 #
 - name: Install starship
   ansible.builtin.shell:
-    cmd: /usr/bin/curl -sS https://starship.rs/install.sh -s -- -y --bin-dir $HOME/.local/bin
+    cmd: /usr/bin/curl -sS https://starship.rs/install.sh | sh -s -- -y --bin-dir $HOME/.local/bin
   when: starship_ver.failed
   changed_when: true
