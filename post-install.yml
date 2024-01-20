@@ -27,6 +27,11 @@
         name: virt
       tags: virt
 
+    - name: Install Nerd Fonts symbols via Copr (che/nerd-fonts)
+      ansible.builtin.include_role:
+        name: nerd_fonts
+      tags: nerd_fonts
+
     - name: Install non-RPM binary packages
       ansible.builtin.include_role:
         name: "{{ item }}"
