@@ -1,0 +1,17 @@
+---
+# tasks file for nerd_fonts
+
+#
+# Install Nerd Fonts Copr - che/nerd-fonts
+#
+
+- name: Enable nerd-fonts Copr repo
+  community.general.copr:
+    host: copr.fedorainfracloud.org
+    state: enabled
+    name: che/nerd-fonts
+
+- name: Install nerd-fonts package
+  ansible.builtin.dnf:
+    name: nerd-fonts
+    state: present
