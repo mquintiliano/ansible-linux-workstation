@@ -43,6 +43,7 @@ packages_extra_packages:
   - gnome-extensions-app
   - gnome-terminal-nautilus
   # development tools:
+  - gcc-c++
   - python3-ipython
   - python3-pip
   - cargo # Rust package manager
