@@ -33,6 +33,7 @@ packages_extra_packages:
   # Fonts
   - adobe-source-code-pro-fonts
   - cascadia-code-fonts
+  - fira-code-fonts
   # gui apps
   - gimp
   - inkscape
