@@ -43,7 +43,7 @@ function check_ansible() {
 	echo "Checking if Ansible is present..."
 	if ! [ -x "$(command -v ansible)" ]; then
 		echo "Installing Ansible..."
-		sudo dnf install -y ansible
+		sudo dnf install -y ansible ansible-collection-community-general
 	else
 		echo "We're all set..."
 	fi

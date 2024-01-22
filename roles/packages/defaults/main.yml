@@ -7,7 +7,6 @@ packages_delete_software: true
 
 packages_extra_packages:
   # cli
-  - ansible-collection-community-general
   - dnf-utils
   - fd-find
   # - ffmpeg
